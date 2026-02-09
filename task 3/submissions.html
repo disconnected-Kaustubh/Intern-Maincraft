@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <link rel="stylesheet" href="style.css">
+  <title>Submissions</title>
+</head>
+<body>
+
+<h2>Saved Submissions</h2>
+
+<div id="data"></div>
+<button onclick="clearData()">Clear All Submissions</button>
+
+<script>
+    
+let submissions = JSON.parse(localStorage.getItem("submissions")) || [];
+
+let display = document.getElementById("data");
+
+if(submissions.length === 0){
+    display.innerHTML = "<p>No submissions yet</p>";
+} else {
+    submissions.forEach(function(item){
+        display.innerHTML += `
+            <p>
+            <b>Name:</b> ${item.name} <br>
+            <b>Email:</b> ${item.email} <br>
+            <b>Message:</b> ${item.message}
+            </p>
+            <hr>
+        `;
+    });
+}
+</script>
+<script>
+function clearData(){
+    localStorage.removeItem("submissions");
+    alert("All data cleared!");
+    location.reload();
+}
+</script>
+
+<br>
+<a href="contact.html">Back to Form</a>
+
+</body>
+</html>
